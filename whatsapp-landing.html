@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HFPL AI Assistant — Ask Us Anything</title>
+
+<!-- WhatsApp / OG Meta Tags for link previews -->
+<meta property="og:title" content="HFPL AI Assistant — Water Treatment Experts">
+<meta property="og:description" content="Ask our AI about ZLD, ETP, STP, RO-EDI systems. Get instant answers on water treatment compliance & proposals. Powered by Hyper Filteration Pvt. Ltd.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://hyperfilteration.github.io/ai-agent/preview.png">
+<meta property="og:url" content="https://hyperfilteration.github.io/ai-agent/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Ask HFPL's AI about ZLD, ETP, STP, RO systems and water treatment compliance. Instant expert answers from India's leading EPC water treatment company.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --teal: #0F6E56;
+  --teal-light: #1D9E75;
+  --teal-mid: #5DCAA5;
+  --teal-pale: #E1F5EE;
+  --wa-green: #25D366;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: linear-gradient(160deg, #f0faf6 0%, #e6f4ef 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero {
+  width: 100%;
+  max-width: 480px;
+  padding: 36px 24px 20px;
+  text-align: center;
+}
+
+.logo-wrap {
+  width: 72px; height: 72px;
+  background: var(--teal);
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 6px 24px rgba(15,110,86,0.3);
+}
+
+.tagline {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 26px;
+  color: #0d2218;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.sub {
+  font-size: 15px;
+  color: #5a7066;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.cta-primary {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  background: var(--teal);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(15,110,86,0.35);
+  margin-bottom: 12px;
+  transition: all 0.18s;
+}
+
+.cta-primary:hover { background: #085041; transform: translateY(-1px); }
+
+.cta-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  background: var(--wa-green);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  margin-bottom: 24px;
+  transition: all 0.18s;
+}
+
+.cta-wa:hover { background: #1da851; transform: translateY(-1px); }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.tag {
+  background: #fff;
+  border: 1px solid #c8e8db;
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+.chat-preview {
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  overflow: hidden;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.08);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-bar {
+  background: var(--teal);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.preview-av {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: #fff; font-size: 13px;
+}
+
+.preview-name { color: #fff; font-size: 14px; font-weight: 600; }
+.preview-online { color: rgba(255,255,255,0.65); font-size: 11px; }
+
+.preview-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%; background: var(--teal-mid);
+  margin-left: auto;
+}
+
+.preview-msgs {
+  padding: 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  background: #f8fcfa;
+  flex: 1;
+}
+
+.pm { display: flex; gap: 8px; align-items: flex-start; }
+.pm.u { flex-direction: row-reverse; }
+
+.pav {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--teal); color: #fff;
+  font-size: 10px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+.pav.u { background: #dbeafe; color: #1d4ed8; }
+
+.pb {
+  max-width: 82%;
+  padding: 8px 12px;
+  font-size: 13px; line-height: 1.55;
+  border-radius: 4px 12px 12px 12px;
+  background: #fff;
+  border: 1px solid #e4f0eb;
+  color: #1a2a22;
+}
+
+.pb.u {
+  background: var(--teal);
+  color: #fff;
+  border-radius: 12px 4px 12px 12px;
+  border-color: transparent;
+}
+
+.preview-cta {
+  padding: 14px 16px;
+  background: #fff;
+  border-top: 1px solid #e4f0eb;
+}
+
+.open-btn {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  background: var(--teal);
+  color: #fff;
+  border: none; border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.footer {
+  padding: 18px;
+  text-align: center;
+  font-size: 11px;
+  color: #8fa89e;
+  background: #fff;
+  width: 100%; max-width: 480px;
+}
+
+.footer a { color: var(--teal); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="logo-wrap">
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
+      <path d="M19 3C19 3 7 14 7 22a12 12 0 0 0 24 0C31 14 19 3 19 3z" fill="rgba(255,255,255,0.9)"/>
+      <circle cx="19" cy="22" r="4" fill="#0F6E56"/>
+      <path d="M14 21 Q19 16 24 21" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <div class="tagline">Hyper Filteration Pvt. Ltd.</div>
+  <h1>Ask HFPL's AI Water Treatment Expert</h1>
+  <p class="sub">Get instant answers on ZLD, ETP, STP, RO-EDI systems, compliance, and project proposals — 24/7.</p>
+
+  <a class="cta-primary" href="YOUR_GITHUB_PAGES_URL" target="_blank">
+    🤖 Open AI Assistant
+  </a>
+
+  <a class="cta-wa" href="https://wa.me/91XXXXXXXXXX?text=Hi%20HFPL%2C%20I%20want%20to%20know%20more%20about%20your%20water%20treatment%20solutions" target="_blank">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+    </svg>
+    Chat on WhatsApp
+  </a>
+
+  <div class="tags">
+    <span class="tag">Zero Liquid Discharge</span>
+    <span class="tag">ETP Design</span>
+    <span class="tag">RO-EDI Systems</span>
+    <span class="tag">ZLD Compliance</span>
+    <span class="tag">Pharma Water</span>
+    <span class="tag">Textile ZLD</span>
+    <span class="tag">CPCB Norms</span>
+    <span class="tag">Full EPC</span>
+  </div>
+</div>
+
+<!-- Chat Preview -->
+<div class="chat-preview">
+  <div class="preview-bar">
+    <div class="preview-av">HF</div>
+    <div>
+      <div class="preview-name">HFPL AI Assistant</div>
+      <div class="preview-online">Water Treatment Expert · Online</div>
+    </div>
+    <div class="preview-dot"></div>
+  </div>
+
+  <div class="preview-msgs">
+    <div class="pm">
+      <div class="pav">HF</div>
+      <div class="pb">Hello! I'm HFPL's AI. Ask me anything about ZLD, ETP, STP, RO systems, or regulatory compliance across India. 💧</div>
+    </div>
+    <div class="pm u">
+      <div class="pav u">You</div>
+      <div class="pb u">We're a textile mill. Is ZLD mandatory for us?</div>
+    </div>
+    <div class="pm">
+      <div class="pav">HF</div>
+      <div class="pb">Yes — ZLD is mandatory for textile dyeing and processing units under CPCB norms. HFPL has delivered ZLD systems up to <strong>5,000 KLD</strong> for textile parks. We can design a True ZLD system with MBR + RO + MEE tailored to your capacity. Want a preliminary proposal?</div>
+    </div>
+  </div>
+
+  <div class="preview-cta">
+    <a class="open-btn" href="YOUR_GITHUB_PAGES_URL" target="_blank">
+      Start Chatting with HFPL AI →
+    </a>
+  </div>
+</div>
+
+<div class="footer">
+  <strong>Hyper Filteration Pvt. Ltd.</strong> · CEO: Gaurav Gupta<br>
+  <a href="mailto:gaurav@hyperfilteration.com">gaurav@hyperfilteration.com</a> · <a href="tel:+91XXXXXXXXXX">+91-XXXXXXXXXX</a>
+</div>
+
+</body>
+</html>
