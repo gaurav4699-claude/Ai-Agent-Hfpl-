@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HFPL Assistant — Hyper Filteration Pvt. Ltd.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal: #0F6E56;
+    --teal-dark: #085041;
+    --teal-light: #1D9E75;
+    --teal-mid: #5DCAA5;
+    --teal-pale: #E1F5EE;
+    --teal-faint: #f0faf6;
+    --navy: #042C53;
+    --blue: #185FA5;
+    --blue-pale: #E6F1FB;
+    --text: #1a2a22;
+    --text-muted: #5a7066;
+    --text-light: #8fa89e;
+    --bg: #ffffff;
+    --bg2: #f8fcfa;
+    --bg3: #f0faf6;
+    --border: #d4e8df;
+    --border-light: #e8f4ef;
+    --shadow: 0 2px 12px rgba(15,110,86,0.08);
+    --shadow-lg: 0 8px 32px rgba(15,110,86,0.12);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: linear-gradient(135deg, #f0faf6 0%, #e8f4ef 50%, #f0faf6 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  /* ── Layout ── */
+  .page {
+    width: 100%;
+    max-width: 900px;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+    min-height: 640px;
+    background: var(--bg);
+  }
+
+  /* ── Sidebar ── */
+  .sidebar {
+    background: var(--teal);
+    padding: 28px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sidebar::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+
+  .sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative; z-index: 1;
+  }
+
+  .brand-icon {
+    width: 46px; height: 46px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px; font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+  }
+
+  .brand-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 2px;
+    font-weight: 400;
+  }
+
+  .sidebar-section { position: relative; z-index: 1; }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 10px;
+  }
+
+  .service-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    margin-bottom: 6px;
+    color: rgba(255,255,255,0.85);
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .service-pill:hover { background: rgba(255,255,255,0.18); }
+
+  .service-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #5DCAA5;
+    flex-shrink: 0;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 20px; font-weight: 600;
+    color: #fff;
+  }
+
+  .stat-lbl {
+    font-size: 10px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 2px;
+  }
+
+  .sidebar-cta {
+    margin-top: auto;
+    position: relative; z-index: 1;
+  }
+
+  .cta-btn {
+    width: 100%;
+    padding: 11px;
+    background: #fff;
+    color: var(--teal);
+    border: none;
+    border-radius: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.01em;
+  }
+
+  .cta-btn:hover {
+    background: var(--teal-pale);
+    transform: translateY(-1px);
+  }
+
+  .cta-sub {
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    margin-top: 8px;
+  }
+
+  /* ── Chat Panel ── */
+  .chat-panel {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+  }
+
+  .chat-topbar {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg);
+  }
+
+  .online-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+  }
+
+  .topbar-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .topbar-sub {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-left: auto;
+  }
+
+  .chip-strip {
+    padding: 10px 16px;
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg2);
+  }
+
+  .chip {
+    font-size: 11.5px;
+    padding: 5px 11px;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-muted);
+    transition: all 0.15s;
+    white-space: nowrap;
+    font-family: inherit;
+  }
+
+  .chip:hover {
+    background: var(--teal-pale);
+    border-color: var(--teal-mid);
+    color: var(--teal);
+  }
+
+  .messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 18px 18px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    scroll-behavior: smooth;
+  }
+
+  .msg { display: flex; gap: 10px; align-items: flex-start; }
+  .msg.user { flex-direction: row-reverse; }
+
+  .avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 600;
+    flex-shrink: 0;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .avatar.bot { background: var(--teal); color: #fff; }
+  .avatar.user { background: var(--blue-pale); color: var(--blue); }
+
+  .bubble {
+    max-width: 76%;
+    padding: 10px 14px;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  .bubble.bot {
+    background: var(--bg2);
+    border: 1px solid var(--border-light);
+    border-radius: 4px 14px 14px 14px;
+    color: var(--text);
+  }
+
+  .bubble.user {
+    background: var(--teal);
+    color: #fff;
+    border-radius: 14px 4px 14px 14px;
+  }
+
+  .bubble ul {
+    padding-left: 18px;
+    margin: 6px 0;
+  }
+
+  .bubble li { margin-bottom: 4px; }
+  .bubble strong { font-weight: 600; }
+
+  .typing { display: flex; gap: 5px; align-items: center; padding: 2px 0; }
+  .typing span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal-mid);
+    animation: tdot 1.3s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes tdot {
+    0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+    30% { transform: translateY(-5px); opacity: 1; }
+  }
+
+  .time-stamp {
+    font-size: 10px;
+    color: var(--text-light);
+    margin-top: 3px;
+    text-align: right;
+  }
+
+  .msg.user .time-stamp { text-align: left; }
+
+  .input-area {
+    padding: 12px 16px 16px;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    gap: 9px;
+    align-items: flex-end;
+    background: var(--bg);
+  }
+
+  textarea#inp {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    resize: none;
+    min-height: 40px;
+    max-height: 100px;
+    outline: none;
+    transition: border-color 0.15s;
+    line-height: 1.5;
+  }
+
+  textarea#inp:focus { border-color: var(--teal-mid); background: var(--bg); }
+  textarea#inp::placeholder { color: var(--text-light); }
+
+  .send-btn {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--teal);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s;
+    box-shadow: 0 2px 8px rgba(15,110,86,0.3);
+  }
+
+  .send-btn:hover { background: var(--teal-dark); transform: translateY(-1px); }
+  .send-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .footer-bar {
+    padding: 6px 16px 12px;
+    text-align: center;
+    font-size: 10.5px;
+    color: var(--text-light);
+  }
+
+  .footer-bar a { color: var(--teal); text-decoration: none; }
+
+  /* ── Responsive ── */
+  @media (max-width: 680px) {
+    .page { grid-template-columns: 1fr; min-height: auto; }
+    .sidebar { display: none; }
+    body { padding: 0; align-items: flex-start; }
+    .page { border-radius: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+          <path d="M13 2C13 2 5 9.5 5 15.5a8 8 0 0 0 16 0c0-6-8-13.5-8-13.5z" fill="rgba(255,255,255,0.9)"/>
+          <circle cx="13" cy="16" r="3" fill="#0F6E56"/>
+          <path d="M10 15.5 Q13 12 16 15.5" stroke="rgba(255,255,255,0.5)" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">HFPL</div>
+        <div class="brand-sub">Hyper Filteration Pvt. Ltd.</div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Core Services</div>
+      <div class="service-pill" onclick="askChip('Tell me about your ZLD systems')"><span class="service-dot"></span>Zero Liquid Discharge (ZLD)</div>
+      <div class="service-pill" onclick="askChip('Tell me about Effluent Treatment Plants')"><span class="service-dot"></span>Effluent Treatment (ETP)</div>
+      <div class="service-pill" onclick="askChip('Tell me about Sewage Treatment Plants')"><span class="service-dot"></span>Sewage Treatment (STP)</div>
+      <div class="service-pill" onclick="askChip('Tell me about RO-EDI systems')"><span class="service-dot"></span>RO / RO-EDI Systems</div>
+      <div class="service-pill" onclick="askChip('What is CETP and when is it used?')"><span class="service-dot"></span>CETP for Industrial Parks</div>
+      <div class="service-pill" onclick="askChip('Tell me about MEE and ATFD systems')"><span class="service-dot"></span>MEE / ATFD Evaporation</div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">HFPL at a Glance</div>
+      <div class="stat-row">
+        <div class="stat-card"><div class="stat-num">EPC</div><div class="stat-lbl">Full turnkey</div></div>
+        <div class="stat-card"><div class="stat-num">ZLD</div><div class="stat-lbl">True zero discharge</div></div>
+        <div class="stat-card"><div class="stat-num">10+</div><div class="stat-lbl">Active projects</div></div>
+        <div class="stat-card"><div class="stat-num">Pan<br>India</div><div class="stat-lbl">Multi-state delivery</div></div>
+      </div>
+    </div>
+
+    <div class="sidebar-cta">
+      <button class="cta-btn" onclick="askChip('I want to request a proposal from HFPL for my plant')">Request a Proposal</button>
+      <div class="cta-sub">CEO: Gaurav Gupta · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="492e283c3b283f092130392c3b2f20253d2c3b283d202627672a2624">[email&#160;protected]</a></div>
+    </div>
+  </div>
+
+  <!-- CHAT PANEL -->
+  <div class="chat-panel">
+    <div class="chat-topbar">
+      <div class="online-dot"></div>
+      <div class="topbar-title">HFPL AI Assistant</div>
+      <div class="topbar-sub">Water Treatment Experts · Ask anything</div>
+    </div>
+
+    <div class="chip-strip">
+      <button class="chip" onclick="askChip('What is ZLD and is it mandatory for my industry?')">What is ZLD?</button>
+      <button class="chip" onclick="askChip('What is the difference between ETP and STP?')">ETP vs STP</button>
+      <button class="chip" onclick="askChip('We are a textile mill. What ZLD solution do you recommend?')">ZLD for textiles</button>
+      <button class="chip" onclick="askChip('We need RO-EDI for our bulk drug park')">RO-EDI for pharma</button>
+      <button class="chip" onclick="askChip('Tell me about HFPL key projects and experience')">Projects</button>
+      <button class="chip" onclick="askChip('What Indian environmental regulations apply to our wastewater?')">Regulations</button>
+    </div>
+
+    <div class="messages" id="messages"></div>
+
+    <div class="input-area">
+      <textarea id="inp" placeholder="Ask about ZLD, ETP, RO systems, compliance, proposals..." rows="1"
+        onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();doSend();}"></textarea>
+      <button class="send-btn" id="sendbtn" onclick="doSend()">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M14.5 8L1.5 1.5L4.5 8L1.5 14.5L14.5 8Z" fill="white"/>
+        </svg>
+      </button>
+    </div>
+    <div class="footer-bar">
+      Powered by <strong>Hyper Filteration Pvt. Ltd.</strong> · <a href="/cdn-cgi/l/email-protection#d4bdbab2bb94bcada4b1a6b2bdb8a0b1a6b5a0bdbbbafab7bbb9"><span class="__cf_email__" data-cfemail="94fdfaf2fbd4fcede4f1e6f2fdf8e0f1e6f5e0fdfbfabaf7fbf9">[email&#160;protected]</span></a>
+    </div>
+  </div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const SYSTEM_PROMPT = `You are HFPL Assistant — the official AI Brand Ambassador and sales consultant for Hyper Filteration Pvt. Ltd. (HFPL), a premier Indian EPC (Engineering, Procurement & Construction) company specializing in industrial water and wastewater treatment.
+
+## ABOUT HFPL
+- Full name: Hyper Filteration Pvt. Ltd.
+- CEO: Gaurav Gupta
+- Email: gaurav@hyperfilteration.com | info@hyperfilteration.com
+- Specialization: End-to-end EPC solutions — from concept and design through procurement, construction, and commissioning
+
+## CORE SERVICES & TECHNOLOGIES
+1. **ETP (Effluent Treatment Plants)** — Industrial wastewater treatment for textile, pharma, chemical, food & beverage industries
+2. **STP (Sewage Treatment Plants)** — Municipal, commercial, and residential sewage treatment
+3. **ZLD (Zero Liquid Discharge)** — India's most stringent wastewater mandate; HFPL is a specialist in True ZLD for textile, pharma, chemical sectors
+4. **RO Systems (Reverse Osmosis)** — High-purity water systems, including RO-EDI for ultra-pure pharmaceutical water
+5. **CETP (Common Effluent Treatment Plants)** — Shared treatment infrastructure for bulk drug parks, industrial clusters, textile parks
+6. **MBR (Membrane Bioreactor)** — Advanced biological treatment for high-quality reuse water
+7. **MEE (Multiple Effect Evaporator)** — Brine concentration and volume reduction in ZLD trains
+8. **ATFD (Agitated Thin Film Dryer)** — Solids recovery in ZLD; converts concentrated brine to dry salt cake
+
+## ZLD TREATMENT TRAIN (HFPL's approach)
+Typical ZLD: Primary ETP → Secondary Biological Treatment (MBR or MBBR) → Tertiary (UF/RO) → Reject Management (MEE) → Solids Recovery (ATFD) → Zero discharge achieved.
+
+## KEY PROJECTS & EXPERIENCE
+- **APIIC Nakkapally Bulk Drug Park** (Visakhapatnam, AP): 4.4 MLD RO-EDI system. LOI received. Ultra-pure water for pharma manufacturing.
+- **HP Una Bulk Drug Park** (Himachal Pradesh): 5 MLD CETP + ZLD system for bulk drug cluster
+- **Ionex Textile Park** (Shamli, UP): 5,000 KLD True ZLD — one of the largest textile ZLD systems
+- **Rajasthan Textile Mills (RTM)**: 980 KLD ZLD upgrade, asset reuse, ~29-month payback demonstrated
+- **PM MITRA Park** (Dhar, Madhya Pradesh): ZLD EPC tender for Government textile park
+- **Al Safi Danone**: 16.5 MLD Raw Water RO upgrade + 10 MLD and 4.5 MLD STP upgrades
+- **Epsilon Carbon** (Odisha): Industrial ETP project
+
+## SECTORS SERVED
+Bulk Drug/Pharma, Textiles (dyeing, processing), Chemicals, Food & Beverage, Government Industrial Parks, Municipal Sewage
+
+## REGULATORY EXPERTISE
+- CPCB (Central Pollution Control Board) norms
+- MoEF&CC notifications and EIA requirements
+- State PCBs: UPPCB, TNPCB, APIIC, HPSIDC, MPIDC, RPCB
+- GSR 85(E) and S.O. 389(E) 2026 — latest Indian environmental regulations
+- ZLD mandates for textile, pharma, tannery, distillery sectors
+- SEIAA environmental clearances
+
+## COMPETITIVE DIFFERENTIATORS
+- True full EPC capability — design, supply, installation, commissioning, O&M support
+- Deep ZLD specialization; India's stricter mandates require expertise HFPL has
+- Experience with government tender processes: APIIC, HPSIDC, MPIDC, NMCG
+- AI-powered HFPL TenderScope — proprietary tender intelligence tool
+- Multi-state simultaneous project execution capability
+- Proven financial modeling for ZLD (payback, OpEx, CapEx)
+
+## YOUR ROLE
+- Be HFPL's warm, knowledgeable, professional brand ambassador
+- Explain water treatment technologies clearly to non-technical decision-makers
+- Help industries understand their compliance requirements
+- Showcase HFPL's projects and capabilities to build credibility
+- Qualify potential leads and guide them toward requesting a proposal
+- Be factual and specific; mention real project examples when relevant
+- Keep responses concise: 3-6 sentences or a short bullet list maximum
+- End responses with an action-oriented follow-up when appropriate (e.g., "Would you like us to prepare a preliminary proposal?")
+- If asked about pricing, explain that detailed quotes require project specifics and invite them to share their requirements
+
+Never fabricate specific costs, client names, or project details beyond what is listed above. For unknowns, say HFPL would be happy to discuss specific requirements.`;
+
+let history = [
+  {
+    role: 'assistant',
+    content: 'Hello! I\'m HFPL\'s AI Assistant — your guide to India\'s leading water treatment EPC solutions.\n\nWe specialize in **ZLD, ETP, STP, RO-EDI** and full turnkey EPC across industries including textiles, pharma, chemicals, and government parks. From a small 100 KLD ETP to a 5,000 KLD True ZLD plant — we engineer, build, and deliver.\n\nWhat challenge can I help solve for you today?'
+  }
+];
+let busy = false;
+
+const msgsEl = document.getElementById('messages');
+const inp = document.getElementById('inp');
+const btn = document.getElementById('sendbtn');
+
+function formatTime() {
+  return new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', hour12: true });
+}
+
+function parseMD(text) {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>[\s\S]*?<\/li>)/g, m => '<ul>' + m + '</ul>')
+    .replace(/\n\n/g, '<br><br>')
+    .replace(/\n/g, '<br>');
+}
+
+function renderMsg(role, content) {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg' + (role === 'user' ? ' user' : '');
+
+  const av = document.createElement('div');
+  av.className = 'avatar ' + (role === 'user' ? 'user' : 'bot');
+  av.textContent = role === 'user' ? 'You' : 'HF';
+
+  const col = document.createElement('div');
+  col.style.display = 'flex';
+  col.style.flexDirection = 'column';
+  col.style.maxWidth = '78%';
+
+  const bub = document.createElement('div');
+  bub.className = 'bubble ' + (role === 'user' ? 'user' : 'bot');
+  bub.innerHTML = parseMD(content);
+
+  const ts = document.createElement('div');
+  ts.className = 'time-stamp';
+  ts.textContent = formatTime();
+
+  col.appendChild(bub);
+  col.appendChild(ts);
+  wrap.appendChild(av);
+  wrap.appendChild(col);
+  msgsEl.appendChild(wrap);
+  msgsEl.scrollTop = msgsEl.scrollHeight;
+}
+
+function renderTyping() {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg';
+  wrap.id = 'typing-row';
+  const av = document.createElement('div');
+  av.className = 'avatar bot';
+  av.textContent = 'HF';
+  const col = document.createElement('div');
+  const bub = document.createElement('div');
+  bub.className = 'bubble bot';
+  bub.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  col.appendChild(bub);
+  wrap.appendChild(av);
+  wrap.appendChild(col);
+  msgsEl.appendChild(wrap);
+  msgsEl.scrollTop = msgsEl.scrollHeight;
+}
+
+// Render initial message
+renderMsg('assistant', history[0].content);
+
+async function doSend(text) {
+  const q = text !== undefined ? text : inp.value.trim();
+  if (!q || busy) return;
+  inp.value = '';
+  adjustTextarea();
+  busy = true;
+  btn.disabled = true;
+
+  history.push({ role: 'user', content: q });
+  renderMsg('user', q);
+  renderTyping();
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 800,
+        system: SYSTEM_PROMPT,
+        messages: history.map(m => ({ role: m.role, content: m.content }))
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.find(b => b.type === 'text')?.text
+      || 'I had trouble responding. Please reach us directly at info@hyperfilteration.com — we\'d be happy to help!';
+
+    document.getElementById('typing-row')?.remove();
+    history.push({ role: 'assistant', content: reply });
+    renderMsg('assistant', reply);
+  } catch (err) {
+    document.getElementById('typing-row')?.remove();
+    renderMsg('assistant', 'Connection issue encountered. Please contact HFPL directly:\n\n**Email*
